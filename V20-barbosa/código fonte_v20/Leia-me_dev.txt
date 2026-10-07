@@ -1,0 +1,16 @@
+30/01/2026
+A função de sincronismo em burst não funcionava: Retirei a linha que enviava o comando "BS,1;" na função envia_comando(self, string).
+* Percebi que caso não iniciar uma transferência de dados e início de ensaio pelo método unitário, o método sequencial não funciona.
+* Percebi que ao enviar uma linha de comando da sequencia onde há dois ou mais parametros modificados em relação ao anterior, ele não carrega a sequencia.
+
+06/02/2026
+*As correções acima foram implementadas.
+*Percebi que os contadores de tempo, na aba de burst, congelam no momento de envio dos comandos para o gerador e retomam a contagem (no instante em "s") de forma correta, mas essa característica impede do usuário visualizar o tempo exato da mudança de estado do ensaio.
+
+11/02/2026
+*Implementar, no burst, uma proteção contra configuração errada entre duração e frequência.
+
+13/02/2026
+*Foi implementado a proteção citada acima.
+*Início da montagem para surto.
+*Percebi que ao enviar uma sequência (4-4 e 4-5) desabilita o botão referente ao tempo de ensaio (OK!), mas ao deletar a tabela, o combo não volta (OK, resolvido).

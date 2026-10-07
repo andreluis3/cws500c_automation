@@ -1,0 +1,68 @@
+from tkinter import ttk
+
+
+
+
+import threading
+import queue
+import serial
+import time
+import tkinter as tk
+from tkinter import messagebox
+
+
+class IEC46Tab:
+
+    def __init__(self, parent, app):
+
+        self.parent = parent
+        self.app = app
+
+        # SESSÃO SERIAL
+        self._ser = None
+        self._rx_thread = None
+        self._tx_thread = None
+
+        self._tx_queue = queue.Queue()
+        self._event_queue = queue.Queue()
+
+        self._stop_evt = threading.Event()
+        # HANDLERS CWS
+        self._handlers = self._build_handlers()
+
+
+
+    def build_46_tab(self):
+        label = ttk.Label(self.iec46_tab, text="IEC 61000-4-6 (Em construção!)")
+        label.pack(pady=20)
+
+
+        
+        
+    def _build_handlers(self):
+        return {
+            "RR,00": self._on_rr_00_test_finished,
+            "RR,03": self._on_rr_03_invalid_calibration_memory,
+            "RR,04": self._on_rr_04_voltage_out_of_limits,
+            "RR,05": self._on_rr_05_fail1_test_interrupted,
+            "RR,06": self._on_rr_06_fail2,
+            "RR,10": self._on_rr_10_string_error,
+            "RR,11": self._on_rr_11_test_not_possible,
+            "RR,13": self._on_rr_13_coupling_matrix_error,
+            "RR,14": self._on_rr_14_parameter_limited,
+            # RR,15 → Erro de checksum — reenviar comando
+            "RR,15": self._on_rr_15_checksum_error,
+            # RR,19 → Erro de comunicação interna
+            "RR,19": self._on_rr_19_internal_communication_error,
+            "RR,20": self._on_rr_20_uncorrectable_limiting_error,
+            "RR,25": self._on_rr_25_corrupt_calibration_data,
+            # RR,31 → Memória BCI inválida
+            "RR,31": self._on_rr_31_invalid_bci_memory,
+            # RR,32 → Erro relacionado à memória BCI
+            "RR,32": self._on_rr_32_bci_error,
+        }
+        
+    def enviar_parametros_cws(self):
+        
+    def iniciar_teste_cws(self):
+    # inicia o fluxo do ensaio
