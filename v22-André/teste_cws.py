@@ -3,7 +3,7 @@ import time
 import serial
 import serial.tools.list_ports
 
-PORTA = "COM5"  # Troque pela COM do Bob Esponja
+PORTA = "/dev/rfcomm0" # Troque pela COM do Bob Esponja
 
 
 def comando(texto: str) -> bytes:

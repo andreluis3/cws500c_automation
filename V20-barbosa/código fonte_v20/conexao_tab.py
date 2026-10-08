@@ -126,6 +126,21 @@ class conexaoTab:
         # Agora conversor já retorna bytes prontos
         s1 = self.conversor(x)
         return bytearray(s1)
+    
+    
+    def _enter_desconectar(self, event=None):
+        """
+        Ao pressionar Enter, envia o comando de desconexão
+        somente se o CWS estiver selecionado e conectado.
+        """
+        global cws_bool
+
+        equipamento = self.equipamento_var.get()
+
+        if equipamento == "CWS-500" and cws_bool:
+            print("[CWS] Enter pressionado. Desconectando...")
+            self.desconectar_comando()
+    
 
     def conectar_comando(self):
         global resposta
