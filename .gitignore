@@ -1,3 +1,16 @@
+# Python
 __pycache__/
-*.py[cod]
-*$py.class
+*.pyc
+.venv/
+venv/
+
+# Build e executáveis
+build/
+dist/
+*.spec
+
+# IDE
+.vscode/
+
+# Temporários
+*.log
